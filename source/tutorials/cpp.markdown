@@ -1,0 +1,193 @@
+---
+layout: page
+title: "C++ API"
+date: 2013-08-12 18:19
+comments: true
+sharing: true
+footer: true
+---
+Introduction
+============
+The C++ API corresponds to the REST API for consist usage of APIs. See REST API for actual examples of arguments and response data for each operations.
+
+The C++ API
+===========
+Following is the header file of the C++ APIs.
+
+```c++
+
+/*! \brief The SoTopless namespace which has C++ API functions.
+ * SoTopless APIs are in the topl namespace. These include creating, purging,
+ * dropping a leaderboard, sending score, querying score and rank of a user,
+ * and querying top N users from rank K.
+ *
+ * Why use namespaces instead of classes and objects?
+ * This is to help C programmers use the C-like API without
+ * any understanding of C++ classes and objects.
+ */
+namespace topl {
+   /*! \brief The enumeration containing the result values of function execution.
+    * They are success and fail. 
+    */ 
+    typedef enum {
+       success,
+       failure 
+    } result;
+
+    /*! \brief The user namespace containing user management.
+     */
+    namespace user {
+        /*! The handle of a user.
+         * This handle is used by SoTopless APIs instead of the string identity.
+         * Why? Using integer handles boost the performance
+         * for looking up a users in a database.
+         */
+        typedef int64_t handle_t;
+
+        /*! Create a user by specifying the email or device ID of the user.
+         * \param user_identity [IN] user email or device ID that represents the user.
+         * \param handle [OUT] the handle of the created user.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result create( const std::string & user_identity,
+                       handle_t * handle );
+
+        /*! Get the handle of a user.
+         * The handle is required for using SoTopless APIs related to a specific user.
+         * \param user_identity [IN] user email or device ID that represents the user.
+         * \param  handle [OUT] the handle of a given user specified by user_identity.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result get( const std::string & user_identity,
+                    handle_t * handle );
+    }
+
+    /*! \brief The util namespace containing utility functions.
+     */
+    namespace util {
+        /*! The date struct used to create a object which is used by SoTopless APIs.
+         * This is an opaque struct. The fields are not accesable.
+         */
+        typedef struct int64_t timestamp_t;
+    }
+
+    /*! \brief The leaderboard namespace containing leaderboard management.
+     */
+    namespace leaderboard {
+        /*! The handle of a leaderboard.
+         * This handle is used by SoTopless APIs
+         * instead of the string identity of a leaderboard.
+         * Why? Using integer handles boost the performance
+         * for looking up a leaderboard in a database.
+         */
+        typedef int16_t handle_t;
+
+        /*! Create a leaderboard.
+         * \param leaderboard_identity [IN] the name of the leaderboard to create.
+         * \param handle [OUT] the handle of the created leaderboard.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result create( const std::string & leaderboard_identity,
+                       handle_t * handle );
+
+        /*! Get the handle of a leaderboard.
+         * The handle is required for using SoTopless APIs related to a leaderboard.
+         * \param leaderboard_identity [IN] the name of the leaderboard to create.
+         * \param handle [OUT] the handle of a given leaderboard specified by leaderboard_identity.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result get( const std::string & leaderboard_identity,
+                    handle_t * handle );
+
+
+        /*! The descriptor of a leaderboard.
+         */
+        typedef struct leaderboard_desc_t {
+            handle_t handle;
+            std::string identity;
+        } leaderboard_desc_t;
+
+        /*! Get the list of all leaderboards.
+         * \param leaderboards [OUT] the vector containing the list of leaderboard names.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result list( std::vector<leaderboard_desc_t> * leaderboards );
+
+        /*! Purge score data on a leaderboard stored before a specific date.
+         * \param handle [IN] the handle of the leaderboard to purge.
+         * \param cut_date [IN] the score date stored before the cut_date is purged.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result purge( const handle_t & handle,
+                      const util::timestamp_t & cut_date );
+
+        /*! Drop a leaderboard.
+         * \param handle [IN] the handle of the leaderboard to drop.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result drop( const handle_t & handle );
+    }
+
+    /*! \brief The score namespace for functions posting and getting scores and ranks.
+     */
+    namespace score {
+        /*! score_t; the type of score.
+        */
+        typedef int64_t score_t;
+
+        /*! rank_t; the type for specifying the rank of a user.
+        */
+        typedef int64_t rank_t;
+
+        /*! Put a new user score. If a score exists for the user, it is overwritten.
+         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
+         * \param user_handle [IN] the handle of the user to query.
+         * \param score [IN] the score of the given user.
+         * \param situation [IN] a string representation of data to store
+         *        the situation of the user when he/she got the score.
+         * \param when [IN] the date when the user got the score.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result put( const leaderboard::handle_t & leaderboard_handle,
+                    const user::handle_t & user_handle,
+                    const score_t & score,
+                    const std::string & situation,
+                    const util::timestamp_t & when);
+
+        /*! The user_score_t struct having score and rank information of a user.
+         */
+        typedef struct user_score_t {
+            int64_t           rank;
+            int64_t           userid;
+            int64_t           score;
+            std::string       situation;
+            util::timestamp_t when;
+        } user_score_t ;
+
+        /*! Get score and rank of a specific user.
+         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
+         * \param user_handle [IN] the handle of the user to query.
+         * \param score [OUT] the information on the user score including the rank and score.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result get( const leaderboard::handle_t & leaderboard_handle,
+                    const user::handle_t & user_handle,
+                    user_score_t * score);
+
+        /*! List the top N scores from a specific rank.
+         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
+         * \param from_rank [IN] the beginning rank for the resulting scores.
+         * \param count [IN] the number of scores to fetch. The value N of 'top N'.
+         * \param scores [OUT] the array of scores filled in the user_score_t struct.
+         * \return topl::success on success. topl::failure otherwise.
+         */
+        result list( const leaderboard::handle_t & leaderboard_handle,
+                     const rank_t & from_rank,
+                     const rank_t & count,
+                     std::vector<user_score_t> * scores );
+    }
+
+}
+
+```
+
