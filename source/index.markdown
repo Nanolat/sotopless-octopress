@@ -9,7 +9,7 @@ footer: true
 What?
 -----
 SoTopless is a leaderboard server that supports 100M users per server. 
-It supports REST API using HTTP protocol, and C++ client API for Android, iOS, and Windows platform. 
+It supports REST API using HTTP protocol, and C++/Java client SDK for Android, iOS, and Windows platform. 
 
 Following is the list of features :
 
@@ -28,7 +28,7 @@ To support 100M users for a server, SoTopless uses ASIO library of Boost for sup
 
 Open Source?
 ------------
-SoTopless is an open source software with AGPL v3 license. A commercial license which includes Apache v2 is available for project owners not willing to open their source codes.
+SoTopless is an open source software with AGPL v3 license. A commercial license which includes an Apache v2 license is available for project owners not willing to open their source codes.
 
 Toturial?
 ---------
@@ -36,10 +36,12 @@ To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting sco
 
 Price?
 ------
+We give 1 year Start-up Subscription for free until 08/31/2013. (For one game or one gamified app, email support only.)
+
 1. Community Edition
 := Free, but under AGPL v3 license requiring to open source your projects. 
 2. Start-up Subscription
-:= Includes commercial license. This is for start-up companies or indie developers having less than 3 developers. The price is $1,000 per game(or app) per year. However, you can get the first year subscription for free if you introduce another start-ups or indie developers to join our alpha test.
+:= Includes commercial license. This is for start-up companies or indie developers having less than 3 developers. The price is $2,000 per game(or app) per year.
 3. Enterprise Subscription
 := Includes commercial license. The license is valid for a year with up-to-date software every year. $7,000 per game or app per year.
 4. Enterprise Edition
