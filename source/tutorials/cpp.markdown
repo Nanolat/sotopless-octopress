@@ -1,193 +1,253 @@
 ---
 layout: page
-title: "C++ API"
+title: "C++ Tutorial"
 date: 2013-08-12 18:19
 comments: true
 sharing: true
 footer: true
 ---
+
 Introduction
 ============
-The C++ API corresponds to the REST API for consist usage of APIs. See REST API for actual examples of arguments and response data for each operations.
-
-The C++ API
-===========
-Following is the header file of the C++ APIs.
-
-```c++
-
-/*! \brief The SoTopless namespace which has C++ API functions.
- * SoTopless APIs are in the topl namespace. These include creating, purging,
- * dropping a leaderboard, sending score, querying score and rank of a user,
- * and querying top N users from rank K.
- *
- * Why use namespaces instead of classes and objects?
- * This is to help C programmers use the C-like API without
- * any understanding of C++ classes and objects.
- */
-namespace topl {
-   /*! \brief The enumeration containing the result values of function execution.
-    * They are success and fail. 
-    */ 
-    typedef enum {
-       success,
-       failure 
-    } result;
-
-    /*! \brief The user namespace containing user management.
-     */
-    namespace user {
-        /*! The handle of a user.
-         * This handle is used by SoTopless APIs instead of the string identity.
-         * Why? Using integer handles boost the performance
-         * for looking up a users in a database.
-         */
-        typedef int64_t handle_t;
-
-        /*! Create a user by specifying the email or device ID of the user.
-         * \param user_identity [IN] user email or device ID that represents the user.
-         * \param handle [OUT] the handle of the created user.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result create( const std::string & user_identity,
-                       handle_t * handle );
-
-        /*! Get the handle of a user.
-         * The handle is required for using SoTopless APIs related to a specific user.
-         * \param user_identity [IN] user email or device ID that represents the user.
-         * \param  handle [OUT] the handle of a given user specified by user_identity.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result get( const std::string & user_identity,
-                    handle_t * handle );
-    }
-
-    /*! \brief The util namespace containing utility functions.
-     */
-    namespace util {
-        /*! The date struct used to create a object which is used by SoTopless APIs.
-         * This is an opaque struct. The fields are not accesable.
-         */
-        typedef struct int64_t timestamp_t;
-    }
-
-    /*! \brief The leaderboard namespace containing leaderboard management.
-     */
-    namespace leaderboard {
-        /*! The handle of a leaderboard.
-         * This handle is used by SoTopless APIs
-         * instead of the string identity of a leaderboard.
-         * Why? Using integer handles boost the performance
-         * for looking up a leaderboard in a database.
-         */
-        typedef int16_t handle_t;
-
-        /*! Create a leaderboard.
-         * \param leaderboard_identity [IN] the name of the leaderboard to create.
-         * \param handle [OUT] the handle of the created leaderboard.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result create( const std::string & leaderboard_identity,
-                       handle_t * handle );
-
-        /*! Get the handle of a leaderboard.
-         * The handle is required for using SoTopless APIs related to a leaderboard.
-         * \param leaderboard_identity [IN] the name of the leaderboard to create.
-         * \param handle [OUT] the handle of a given leaderboard specified by leaderboard_identity.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result get( const std::string & leaderboard_identity,
-                    handle_t * handle );
+This tutorial provides examples of using SoTopless APIs.
+For each function call, you need to check the return value to make sure it is topl::success. However, this kind of error checking is not shown in this tutorial to keep it short and simple. 
 
 
-        /*! The descriptor of a leaderboard.
-         */
-        typedef struct leaderboard_desc_t {
-            handle_t handle;
-            std::string identity;
-        } leaderboard_desc_t;
+Setup SoTopless on EC2
+======================
+You can deploy and start SoTopless server in your EC2 node running Linux by issuing a command in your laptop.
 
-        /*! Get the list of all leaderboards.
-         * \param leaderboards [OUT] the vector containing the list of leaderboard names.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result list( std::vector<leaderboard_desc_t> * leaderboards );
+Prerequisites
+-------------
+SoTopless supports Windows, Linux, and OSX platform.
+Java 6 is required for Java SDK and REST service.
 
-        /*! Purge score data on a leaderboard stored before a specific date.
-         * \param handle [IN] the handle of the leaderboard to purge.
-         * \param cut_date [IN] the score date stored before the cut_date is purged.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result purge( const handle_t & handle,
-                      const util::timestamp_t & cut_date );
+Unzip the tarball
+-----------------
+{% codeblock %}
+$ tar xvfz sotopless-1.0.tar.gz
+$ cd sotopless-1.0
+$
+{% endcodeblock %}
 
-        /*! Drop a leaderboard.
-         * \param handle [IN] the handle of the leaderboard to drop.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result drop( const handle_t & handle );
-    }
+Deploy SoTopless on EC2 (Linux)
+-------------------------------
+Run deploy-ec2.sh to deploy SoTopless on your EC2 node.
+{% codeblock %}
+$ ./deploy-ec2.sh -node ec2-123-123-123-123.compute-1.amazonaws.com
+SoTopless version 1.0 deployed on ec2-123-123-123-123.compute-1.amazonaws.com.
 
-    /*! \brief The score namespace for functions posting and getting scores and ranks.
-     */
-    namespace score {
-        /*! score_t; the type of score.
-        */
-        typedef int64_t score_t;
+$
+{% endcodeblock %}
 
-        /*! rank_t; the type for specifying the rank of a user.
-        */
-        typedef int64_t rank_t;
+Deploy SoTopless on Windows
+---------------------------
+Unzip the tarball and run bin/sotopless.bat to run the SoTopless server.
 
-        /*! Put a new user score. If a score exists for the user, it is overwritten.
-         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
-         * \param user_handle [IN] the handle of the user to query.
-         * \param score [IN] the score of the given user.
-         * \param situation [IN] a string representation of data to store
-         *        the situation of the user when he/she got the score.
-         * \param when [IN] the date when the user got the score.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result put( const leaderboard::handle_t & leaderboard_handle,
-                    const user::handle_t & user_handle,
-                    const score_t & score,
-                    const std::string & situation,
-                    const util::timestamp_t & when);
+Deploy SoTopless on OSX and Linux
+---------------------------------
+Unzip the tarball and run bin/sotopless.sh to run the SoTopless server.
 
-        /*! The user_score_t struct having score and rank information of a user.
-         */
-        typedef struct user_score_t {
-            int64_t           rank;
-            int64_t           userid;
-            int64_t           score;
-            std::string       situation;
-            util::timestamp_t when;
-        } user_score_t ;
+User Management
+===============
+To post scores of a user, or get scores and ranks of a user, you need to create the user on SoTopless server. You need to create the user only once, like you sign-up on a web site only once.
+After the user is created, you can get the user handle of the created user. The user handle will be used to post scores, to get scores and ranks of the user on a leaderboard.
 
-        /*! Get score and rank of a specific user.
-         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
-         * \param user_handle [IN] the handle of the user to query.
-         * \param score [OUT] the information on the user score including the rank and score.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result get( const leaderboard::handle_t & leaderboard_handle,
-                    const user::handle_t & user_handle,
-                    user_score_t * score);
+Create a User
+-------------
+Creating a user is simple. Specify an identity of the user such as e-mail, device-id, or GUID. The user::create API gives you a user handle of the created user.
 
-        /*! List the top N scores from a specific rank.
-         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
-         * \param from_rank [IN] the beginning rank for the resulting scores.
-         * \param count [IN] the number of scores to fetch. The value N of 'top N'.
-         * \param scores [OUT] the array of scores filled in the user_score_t struct.
-         * \return topl::success on success. topl::failure otherwise.
-         */
-        result list( const leaderboard::handle_t & leaderboard_handle,
-                     const rank_t & from_rank,
-                     const rank_t & count,
-                     std::vector<user_score_t> * scores );
-    }
+{% codeblock %}
 
+using namespace topl;
+
+user::handle_t user_handle;
+
+// Create a user with an e-mail. 
+user::create("foo.bar@gmail.com", & user_handle);
+
+// Create a user with a device-id or GUID.
+user::create("2b6f0cc904d137be2e1730235f5664094b831186", & user_handle); 
+user::create("759bfd0a-2c91-4e45-a35c-779740ac5e77",     & user_handle);  
+
+{% endcodeblock %}
+
+Get a User Handle
+-----------------
+Once a user is created, you can get the handle of the user by calling user::get function. 
+
+{% codeblock %}
+using namespace topl;
+
+user::handle_t user_handle;
+
+// Get the user handle by e-mail.
+user::get("foo.bar@gmail.com", & user_handle); 
+
+// Get the user handle by device-id or GUID. 
+user::get("2b6f0cc904d137be2e1730235f5664094b831186", & user_handle); 
+user::get("759bfd0a-2c91-4e45-a35c-779740ac5e77",     & user_handle);
+
+{% endcodeblock %}
+
+Leaderboard Management
+======================
+You can create multiple leaderboards, post scores of users based on different criteria. For example, you may want to create leaderboards based on users' countries such as USA, Canada, or Germany. Creating weekly, monthly, and daily leaderboards also requires you to create multiple leaderboards.
+
+Leaderboard management APIs help you to create, get, drop, and purge leaderboards. After creating a leaderboard, you can get the handle of the created leaderboard. The handle will be used to purge, drop a leaderboard. Also it will be used to get scores and ranks of a user, or to get the top N users on a leaderboard.
+
+In case you have monthly, weekly, or daily leaderboards, you can purge those leaderboards regularly to keep the rankings up-to-date. 
+
+Create a Leaderboard
+--------------------
+Following code snippet creates monthly, weekly, and daily leaderboards. After you create the leaderboard, scores posted to the leaderboard is safely stored so that you do not lose any data even on catastropic situations such as power-off or OS crash.
+
+{% codeblock %}
+using namespace topl;
+
+leaderboard::handle_t monthly_handle;
+leaderboard::handle_t weekly_handle ;
+leaderboard::handle_t daily_handle  ;
+
+leaderboard::create("monthly", & monthly_handle);
+leaderboard::create("weekly",  & weekly_handle );
+leaderboard::create("daily",   & daily_handle  );
+
+{% endcodeblock %}
+
+Get a Leaderboard Handle
+------------------------
+Once your leaderboard is created, you can use leaderboard::get function to get the handle of the created leaderboard. 
+
+{% codeblock %}
+using namespace topl;
+
+leaderboard::handle_t monthly_handle;
+leaderboard::handle_t weekly_handle ;
+leaderboard::handle_t daily_handle  ;
+
+leaderboard::get("monthly", & monthly_handle);
+leaderboard::get("weekly",  & weekly_handle );
+leaderboard::get("daily",   & daily_handle  );
+
+{% endcodeblock %}
+
+Get the List of Leaderboards
+----------------------------
+You can get the list of all created leaderboards by using leaderboard::list function.
+
+{% codeblock %}
+using namespace topl;
+using namespace std;
+
+std::vector<leaderboard::leaderboard_desc_t> leaderboards;
+
+leaderboard::list( & leaderboards);
+
+// The leaderboards vector contains an instance of leaderboard_desc_t for each leaderboard.
+for( const leaderboard::leaderboard_desc_t & leaderboard : leaderboards )
+{
+    cout << "leaderboard name : " << leaderboard.identity << endl;
+    cout << "leaderboard handle : " << leaderboard.handle << endl;
+} 
+
+{% endcodeblock %}
+
+Purge Scores on a Leaderboard
+-----------------------------
+You can purge leaderboards such as monthly, weekly, and daily ones to keep the rankings up-to-date.
+
+{% codeblock %}
+using namespace topl;
+
+// 24 hours converted to milliseconds.
+util::timestamp_t one_day_ms = 24 * 60 * 60 * 1000;
+
+util::timestamp_t a_day_ago   = util::now() - one_day_ms;
+util::timestamp_t a_week_ago  = util::now() - 7 * one_day_ms;
+util::timestamp_t a_month_ago = util::now() - 30 * one_day_ms;
+
+leaderboard::purge(monthly_handle, a_day_ago  );
+leaderboard::purge(weekly_handle,  a_week_ago );
+leaderboard::purge(daily_handle,   a_month_ago);
+
+{% endcodeblock %}
+
+Drop a Leaderboard
+------------------
+Dropping a leaderboard is like dropping a table on a database. You will lose all data on the leaderboard to be dropped.
+
+{% codeblock %}
+using namespace topl;
+
+leaderboard::drop(monthly_handle); 
+leaderboard::drop(weekly_handle ); 
+leaderboard::drop(daily_handle  ); 
+
+{% endcodeblock %}
+
+
+Posting and Getting Scores
+==========================
+Whenever a user achieves a new high score, you post the user's score with the handle of the user and the handle of the leaderboard. While you post the user's score, you can provide a string containing the situation of the user such as game items the user used to clear the stage. 
+
+You can get the ranking and score on the leaderboard where you posted the user's score. Also you can get a range of ranking on a leaderboard. For example, you can get the list of users and scores of the top 10 scoreboard by quering the rankings from 1st to 10th. 
+
+Post a User Score
+-----------------
+{% codeblock %}
+using namespace topl;
+
+const int score = 30290;
+const std::string situation = "Black King Sword, White Devil Shield";
+const util::timestamp_t now = util::now();    
+
+score::put(monthly_handle, user_handle, score, situation, now );
+score::put(weekly_handle,  user_handle, score, situation, now );
+score::put(daily_handle,   user_handle, score, situation, now );
+
+{% endcodeblock %}
+
+Get User Score and Ranking
+---------------------------
+Following code snippet gets a score and a ranking on the weekly leaderboard.
+
+{% codeblock %}
+using namespace topl;
+using namespace std;
+
+score::rank_desc_t rank_desc;
+
+score::get(weekly_handle, user_handle, & rank_desc);
+
+cout << "ranking : "      << rank_desc.rank          << endl;
+cout << "user handle : "  << rank_desc.user_handle   << endl;
+cout << "user identity: " << rank_desc.user_identity << endl;
+cout << "score : "        << rank_desc.score         << endl;
+cout << "situation : "    << rank_desc.situation     << endl;
+cout << "time : "         << rank_desc.when          << endl;
+
+{% endcodeblock %}
+
+
+Get Top N Users
+---------------
+The following code snippet prints the top 10 scores and users on the weekly leaderboard.
+
+{% codeblock %}
+using namespace topl;
+using namespace std;
+
+std::vector<score::rank_desc_t> top10_scores;
+
+score::list(weekly_handle, 
+            1,  // The starting ranking. Start from 1st ranking. 
+            10, // The number of users from the 1st ranking.  
+            & top10_scores) );
+
+for( const score::rank_desc_t & rank : top10_scores )
+{
+    cout << "Score : " << rank.score << ", Name : " << rank.user_identity << endl;
 }
 
-```
-
+{% endcodeblock %}

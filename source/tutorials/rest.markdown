@@ -13,29 +13,34 @@ You can deploy and start SoTopless server in your EC2 node running Linux by issu
 
 Prerequisites
 -------------
-Java 6 or higher on Windows or Linux platform is the only requirement for SoTopless.
+SoTopless supports Windows, Linux, and OSX platform.
+Java 6 is required for Java SDK and REST service.
 
 Unzip the tarball
 -----------------
 {% codeblock %}
-tester@bigdatatools$ tar xvfz sotopless-1.0.tar.gz
-tester@bigdatatools$ cd sotopless-1.0
-tester@bigdatatools$
+$ tar xvfz sotopless-1.0.tar.gz
+$ cd sotopless-1.0
+$
 {% endcodeblock %}
 
 Deploy SoTopless on EC2 (Linux)
 -------------------------------
 Run deploy-ec2.sh to deploy SoTopless on your EC2 node.
 {% codeblock %}
-tester@bigdatatools$ ./deploy-ec2.sh -node ec2-123-123-123-123.compute-1.amazonaws.com
+$ ./deploy-ec2.sh -node ec2-123-123-123-123.compute-1.amazonaws.com
 SoTopless version 1.0 deployed on ec2-123-123-123-123.compute-1.amazonaws.com.
 
-tester@bigdatatools$
+$
 {% endcodeblock %}
 
 Deploy SoTopless on Windows
 ---------------------------
 Unzip the tarball and run bin/sotopless.bat to run the SoTopless server.
+
+Deploy SoTopless on OSX and Linux 
+---------------------------------
+Unzip the tarball and run bin/sotopless.sh to run the SoTopless server.
 
 Leaderboard Management
 ======================
