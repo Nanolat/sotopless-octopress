@@ -44,12 +44,16 @@ namespace topl {
          */
         typedef int64_t handle_t;
 
+        /* The identity of a user. It can be either an email or device ID of a mobile device.
+         */
+        typedef std::string identity_t;
+
         /*! Create a user by specifying the email or device ID of the user.
          * \param user_identity [IN] user email or device ID that represents the user.
          * \param handle [OUT] the handle of the created user.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result create( const std::string & user_identity,
+        result create( const identity_t & user_identity,
                        handle_t * handle );
 
         /*! Get the handle of a user.
@@ -58,17 +62,21 @@ namespace topl {
          * \param  handle [OUT] the handle of a given user specified by user_identity.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result get( const std::string & user_identity,
+        result get( const identity_t & user_identity,
                     handle_t * handle );
     }
 
-    /*! \brief The util namespace containing utility functions.
+    /*! \brief The util namespace containing utility features.
      */
     namespace util {
-        /*! The date struct used to create a object which is used by SoTopless APIs.
-         * This is an opaque struct. The fields are not accesable.
+        /*! The timestamp type used to specify the time of posting users' scores.
          */
-        typedef struct int64_t timestamp_t;
+        typedef int64_t timestamp_t;
+
+        /*! Return the current timestamp.
+         * \return The current timestamp.
+         */
+        timestamp_t now();
     }
 
     /*! \brief The leaderboard namespace containing leaderboard management.
@@ -82,12 +90,16 @@ namespace topl {
          */
         typedef int16_t handle_t;
 
+        /*! The name of the leaderboard.
+         * */
+        typedef std::string identity_t;
+
         /*! Create a leaderboard.
          * \param leaderboard_identity [IN] the name of the leaderboard to create.
          * \param handle [OUT] the handle of the created leaderboard.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result create( const std::string & leaderboard_identity,
+        result create( const identity_t & leaderboard_identity,
                        handle_t * handle );
 
         /*! Get the handle of a leaderboard.
@@ -96,7 +108,7 @@ namespace topl {
          * \param handle [OUT] the handle of a given leaderboard specified by leaderboard_identity.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result get( const std::string & leaderboard_identity,
+        result get( const identity_t & leaderboard_identity,
                     handle_t * handle );
 
 
@@ -104,7 +116,7 @@ namespace topl {
          */
         typedef struct leaderboard_desc_t {
             handle_t handle;
-            std::string identity;
+            identity_t identity;
         } leaderboard_desc_t;
 
         /*! Get the list of all leaderboards.
@@ -118,7 +130,7 @@ namespace topl {
          * \param cut_date [IN] the score date stored before the cut_date is purged.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result purge( const handle_t & handle,
+        result purge( const leaderboard::handle_t & leaderboard_handle,
                       const util::timestamp_t & cut_date );
 
         /*! Drop a leaderboard.
@@ -139,7 +151,7 @@ namespace topl {
         */
         typedef int64_t rank_t;
 
-        /*! Put a new user score. If a score exists for the user, it is overwritten.
+        /*! Post a new user score. If a score exists for the user, it is overwritten.
          * \param leaderboard_handle [IN] the handle of the leaderboard to query.
          * \param user_handle [IN] the handle of the user to query.
          * \param score [IN] the score of the given user.
@@ -148,21 +160,29 @@ namespace topl {
          * \param when [IN] the date when the user got the score.
          * \return topl::success on success. topl::failure otherwise.
          */
-        result put( const leaderboard::handle_t & leaderboard_handle,
-                    const user::handle_t & user_handle,
-                    const score_t & score,
-                    const std::string & situation,
-                    const util::timestamp_t & when);
+        result post( const leaderboard::handle_t & leaderboard_handle,
+                     const user::handle_t & user_handle,
+                     const score_t & score,
+                     const std::string & situation,
+                     const util::timestamp_t & when);
 
-        /*! The user_score_t struct having score and rank information of a user.
+        /*! Remove the score posted by a user.
+         * \param leaderboard_handle [IN] the handle of the leaderboard to query.
+         * \param user_handle [IN] the handle of the user to query.
          */
-        typedef struct user_score_t {
+        result remove( const leaderboard::handle_t & leaderboard_handle,
+        		       const user::handle_t & user_handle);
+
+        /*! The rank_desc_t struct having score and rank information of a user on a leaderboard.
+         */
+        typedef struct rank_desc_t {
             int64_t           rank;
-            int64_t           userid;
+            int64_t           user_handle;
+            user::identity_t  user_identity;
             int64_t           score;
             std::string       situation;
             util::timestamp_t when;
-        } user_score_t ;
+        } rank_desc_t ;
 
         /*! Get score and rank of a specific user.
          * \param leaderboard_handle [IN] the handle of the leaderboard to query.
@@ -172,21 +192,22 @@ namespace topl {
          */
         result get( const leaderboard::handle_t & leaderboard_handle,
                     const user::handle_t & user_handle,
-                    user_score_t * score);
+                    rank_desc_t * score);
 
         /*! List the top N scores from a specific rank.
          * \param leaderboard_handle [IN] the handle of the leaderboard to query.
          * \param from_rank [IN] the beginning rank for the resulting scores.
+         *        from_rank starts from 1. 0 is an invalid argument for the from_rank parameter.
          * \param count [IN] the number of scores to fetch. The value N of 'top N'.
-         * \param scores [OUT] the array of scores filled in the user_score_t struct.
+         * \param scores [OUT] the array of scores filled in the rank_desc_t struct.
          * \return topl::success on success. topl::failure otherwise.
          */
         result list( const leaderboard::handle_t & leaderboard_handle,
                      const rank_t & from_rank,
                      const rank_t & count,
-                     std::vector<user_score_t> * scores );
-    }
+                     std::vector<rank_desc_t> * scores );
 
+    }
 }
 
 ```

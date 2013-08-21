@@ -193,6 +193,8 @@ Whenever a user achieves a new high score, you post the user's score with the ha
 
 You can get the ranking and score on the leaderboard where you posted the user's score. Also you can get a range of ranking on a leaderboard. For example, you can get the list of users and scores of the top 10 scoreboard by quering the rankings from 1st to 10th. 
 
+Also, you may want to remove a score posted by a user. Removing the score posted by a user is supported.
+
 Post a User Score
 -----------------
 {% codeblock %}
@@ -202,9 +204,9 @@ const int score = 30290;
 const std::string situation = "Black King Sword, White Devil Shield";
 const util::timestamp_t now = util::now();    
 
-score::put(monthly_handle, user_handle, score, situation, now );
-score::put(weekly_handle,  user_handle, score, situation, now );
-score::put(daily_handle,   user_handle, score, situation, now );
+score::post(monthly_handle, user_handle, score, situation, now );
+score::post(weekly_handle,  user_handle, score, situation, now );
+score::post(daily_handle,   user_handle, score, situation, now );
 
 {% endcodeblock %}
 
@@ -229,6 +231,18 @@ cout << "time : "         << rank_desc.when          << endl;
 
 {% endcodeblock %}
 
+Remove a User Score
+-------------------
+Following code snippet removes the score posted by a user on monthly, weekly, daily leaderboard.
+
+{% codeblock %}
+using namespace topl;
+
+score::remove(monthly_handle, user_handle );
+score::remove(weekly_handle,  user_handle );
+score::remove(daily_handle,   user_handle );
+
+{% endcodeblock %}
 
 Get Top N Users
 ---------------
