@@ -33,7 +33,7 @@ SoTopless is an open source software with AGPL v3 license. A commercial license 
 
 Toturial?
 ---------
-To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorial/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
+To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
 
 Price?
 ------

@@ -125,7 +125,7 @@ Following code snippet gets a score and a ranking on the weekly leaderboard.
 
 {% codeblock %}
 
-var rank_desc = score::get("weekly", "billg@gmail.com");
+var rank_desc = score_get("weekly", "billg@gmail.com");
 
 console.log( "rank      : " + rank_desc.rank );
 console.log( "user name : " + rank_desc.user_name );
@@ -154,7 +154,7 @@ The following code snippet prints the top 10 scores and users on the weekly lead
 {% codeblock %}
 
 var top10_scores = 
-score::list("weekly", 
+score_list("weekly", 
             1,    // The starting ranking. Start from 1st ranking. 
             10 ); // The number of users from the 1st ranking.  
 
