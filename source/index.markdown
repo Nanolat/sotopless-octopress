@@ -9,7 +9,7 @@ footer: true
 What?
 -----
 SoTopless is a leaderboard server that supports 100M users per server. 
-It supports REST API using HTTP protocol, and C++/Java client SDK for Android, iOS, and Windows platform. 
+It supports C++/Java/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
 Following is the list of features :
 
@@ -33,11 +33,11 @@ SoTopless is an open source software with AGPL v3 license. A commercial license 
 
 Toturial?
 ---------
-To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API, [here](tutorials/rest.html) for REST Tutorial.
+To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorial/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
 
 Price?
 ------
-We give 1 year Start-up Subscription for free until 08/31/2013. (For one game or one gamified app, email support only.)
+We give one year Start-up Subscription for free until 08/31/2013. (For one game or one gamified app, email support only.)
 
 1. Community Edition
 := Free, but under AGPL v3 license requiring to open source your projects. 

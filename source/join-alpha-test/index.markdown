@@ -15,7 +15,8 @@ You will get following components. Supported platforms are Windows and Linux.
 1. SoTopless server written in C++ for processing client requests by maintaining an in-memory ranking database.
 2. SoTopless C/C++ client library.
 2. SoTopless Java client library.
-3. Sample C++ and Java applications with following features.
+2. SoTopless JavaScript client library.
+3. Sample C++, Java, and JavaScript applications with following features.
 
 List of features : 
 
@@ -24,7 +25,5 @@ List of features :
 *   create multiple leaderboards based on time period(for weekly or monthly leaderboard) or on a property of a user (for leaderboards based on locations, age, etc).
 *   query top N users and scores of them for each leaderboard.
 *   query score and rank of a user for each leaderboard.
-
-Optionally, you have REST service server written in Java.
 
 Stay tuned!
