@@ -6,7 +6,7 @@ comments: true
 sharing: true
 footer: true
 ---
-Our closed alpha testing starts on 31st Aug.
+Our closed alpha testing starts on 30th Sep.
 
 Send an email to support [at] nanolat.com to join the closed alpha testing.
 

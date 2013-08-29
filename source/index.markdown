@@ -37,7 +37,7 @@ To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting sco
 
 Price?
 ------
-We give one year Start-up Subscription for free until 08/31/2013. (For one game or one gamified app, email support only.)
+We give one year Start-up Subscription for free until 09/30/2013. (For one game or one gamified app, email support only.)
 
 1. Community Edition
 := Free, but under AGPL v3 license requiring to open source your projects. 
@@ -48,4 +48,4 @@ We give one year Start-up Subscription for free until 08/31/2013. (For one game 
 
 When?
 -----
-The first closed alpha testing starts on 31st Aug. To join the alpha testing, click [here](join-alpha-test).
+The first closed alpha testing starts on 30th Sep. To join the alpha testing, click [here](join-alpha-test).
