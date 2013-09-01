@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "SoTopless"
+title: "A leaderboard server on Nanolat Database."
 date: 2013-08-12 18:16
 comments: true
 sharing: true
