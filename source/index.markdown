@@ -31,6 +31,8 @@ Open Source?
 ------------
 SoTopless is an open source software with AGPL v3 license. A commercial license which includes an Apache v2 license is available for project owners not willing to open their source codes.
 
+The source code is available at [https://github.com/nanolat/sotopless](https://github.com/nanolat/sotopless).
+
 Toturial?
 ---------
 To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
