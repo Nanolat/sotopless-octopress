@@ -12,7 +12,7 @@ This is a problem.
 
 {% img /images/gamecenter.jpg %}
 
-SoTopless is a leaderboard server that excludes cheating players with its own algorithm. 
+SoTopless is a leaderboard server that excludes cheating players with its own genuine player checking algorithm. 
 
 It supports C++/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
