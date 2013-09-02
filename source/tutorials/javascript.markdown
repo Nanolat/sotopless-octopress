@@ -107,6 +107,8 @@ Also, you may want to remove a score posted by a user. Removing the score posted
 
 Post a User Score
 -----------------
+Following code posts a user's score to SoTopless server. SoTopless server runs a quick scrutinization, and includes the score to the given leaderboard only if the score is from a genuine player. 
+
 {% codeblock %}
 
 var score = 30290;

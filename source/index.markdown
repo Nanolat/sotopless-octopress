@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A leaderboard server on Nanolat Database."
+title: "A leaderboard server without any cheating players."
 date: 2013-08-12 18:16
 comments: true
 sharing: true
@@ -8,11 +8,17 @@ footer: true
 ---
 What?
 -----
-SoTopless is a leaderboard server that supports 100M users per server. 
-It supports C++/Java/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
+This is a problem.
+
+{% img /images/gamecenter.jpg %}
+
+SoTopless is a leaderboard server that excludes cheating players with its own algorithm. 
+
+It supports C++/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
 Following is the list of features :
 
+*   Check if a score was posted by a genuine player.
 *   Post a new score of a user.
 *   Get top N users with scores from a leaderboard.  
 *   Get rank and score of a user from a leaderboard. 
@@ -20,16 +26,18 @@ Following is the list of features :
 
 Why?
 ----
+No more scores posted by cheating players. We provide automatic cheating player filter with our own algorithm.
+
 Simple and easy APIs save your time. Focus on your game/app development, instead of designing your ranking database and server.  
-SoTopless supports 100M users per server. No more headaches providing leaderboards to huge number of users in your game(or app) anymore. SoTopless fits well with the leaderboard requirements both for your game, and your gamified app.
+SoTopless fits well with the leaderboard requirements both for your game, and your gamified app.
 
 How?
 ----
-To support 100M users for a server, SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine. SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
+To run our algorithm to check if the player's score is genuine, we need more computing power and efficient server processing. SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine. SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
 
 Open Source?
 ------------
-SoTopless is an open source software with AGPL v3 license. A commercial license which includes an Apache v2 license is available for project owners not willing to open their source codes.
+SoTopless is an open source software with AGPL v3 license. It is open source except for the genuine player checking algorithm. A commercial license which includes an Apache v2 license is available for project owners not willing to open their source codes.
 
 The source code is available at [https://github.com/nanolat/sotopless](https://github.com/nanolat/sotopless).
 
