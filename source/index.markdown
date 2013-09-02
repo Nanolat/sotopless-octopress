@@ -33,7 +33,7 @@ SoTopless fits well with the leaderboard requirements both for your game, and yo
 
 How?
 ----
-To run our algorithm to check if the player's score is genuine, we need more computing power and efficient server processing. SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine. SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
+To run our algorithm to check if the player's score is genuine, we need more computing power and efficient server S/W processing. SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine. SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
 
 Open Source?
 ------------
@@ -47,7 +47,10 @@ To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting sco
 
 Price?
 ------
-We give one year Start-up Subscription for free until 09/30/2013. (For one game or one gamified app, email support only.)
+
+All SoTopless products have an unconditional 60-day money back satisfaction guarantee.
+
+{% img /images/60days.jpg %}
 
 1. Community Edition
 := Free, but under AGPL v3 license requiring to open source your projects. 
