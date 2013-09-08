@@ -68,7 +68,7 @@ localPlayer.authenticateHandler = ^(NSError * error) {
                    leaderboard.localPlayerScore.rank, 
                    leaderboard.localPlayerScore.value );
 
-	    NSLog( @"Listing scores." );
+            NSLog( @"Listing scores." );
 	
             for (NLScore * score in scores) {
                 NSString *dateString = [NSDateFormatter localizedStringFromDate:score.date
@@ -76,7 +76,7 @@ localPlayer.authenticateHandler = ^(NSError * error) {
                                              timeStyle:NSDateFormatterFullStyle];
     
                 NSLog( @"Rank: %lld, Display Alias : %@, Score : %lld, Time : %@",
-                    score.rank, score.playerAlias, score.value, dateString );
+                       score.rank, score.playerAlias, score.value, dateString );
             }
         }]; // [leaderboard loadScoresWithCompletionHandler:...]
     
