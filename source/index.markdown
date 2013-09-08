@@ -14,7 +14,7 @@ This is a problem.
 
 SoTopless is a leaderboard server that excludes cheating players with its own genuine player checking algorithm. 
 
-It supports C++/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
+It supports C++/Objective C/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
 Following is the list of features :
 
@@ -43,7 +43,7 @@ The source code is available at [https://github.com/nanolat/sotopless](https://g
 
 Toturial?
 ---------
-To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
+To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/ios.html) for a sample code of iOS SDK, [here](tutorials/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
 
 Price?
 ------
