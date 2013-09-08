@@ -13,9 +13,9 @@ This sample shows a working code for using SoTopless iOS SDK.
 
 GameKit Compatibility
 =====================
-SoTopless iOS SDK provides compatible API for major features of Leaderboard API in Apple GameKit.
+SoTopless iOS SDK provides simple and easy to use APIs like Apple GameKit. In case you have experience in leveloping leaderboards using GameKit, you will feel familar with iOS SDK as well.
 
-The only different part is user authentication. You need to pass playerID, playerAlias, and a password. 
+However, there are some different parts such as user authentication. You need to pass playerID, playerAlias, and a password. 
 
 A Sample Code 
 -----------
