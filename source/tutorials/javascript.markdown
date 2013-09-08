@@ -18,7 +18,7 @@ After the user is created, you can use the name of the user to post scores, to g
 
 Create a User
 -------------
-Creating a user is simple. Specify the identiy of the user such as e-mail, device-id, or GUID. The user_create function creates a user.
+Creating a user is simple. Specify the identity of the user such as e-mail, device-id, or GUID. The user_create function creates a user.
 
 {% codeblock %}
 // Create a user with an e-mail. 
@@ -101,7 +101,7 @@ Posting and Getting Scores
 ==========================
 Whenever a user achieves a new high score, you post the user's score with the identity of the user and the name of the leaderboard. While you post the user's score, you can provide a string containing the situation of the user such as game items the user used to clear the stage. 
 
-You can get the ranking and score on the leaderboard where you posted the user's score. Also you can get a range of ranking on a leaderboard. For example, you can get the list of users and scores of the top 10 scoreboard by quering the rankings from 1st to 10th. 
+You can get the ranking and score on the leaderboard where you posted the user's score. Also you can get a range of ranking on a leaderboard. For example, you can get the list of users and scores of the top 10 scoreboard by querying the rankings from 1st to 10th. 
 
 Also, you may want to remove a score posted by a user. Removing the score posted by a user is supported.
 

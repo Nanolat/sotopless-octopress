@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "A leaderboard server without any cheating players."
+title: "A leaderboard server without any cheating players on top scores."
 date: 2013-08-12 18:16
 comments: true
 sharing: true
@@ -12,7 +12,7 @@ This is a problem.
 
 {% img /images/gamecenter.jpg %}
 
-SoTopless is a leaderboard server that excludes cheating players with its own genuine player checking algorithm. 
+SoTopless is a leaderboard server(ranking server) that excludes cheating players with its own genuine player checking algorithm. 
 
 It supports C++/Objective C/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
@@ -22,7 +22,7 @@ Following is the list of features :
 *   Post a new score of a user.
 *   Get top N users with scores from a leaderboard.  
 *   Get rank and score of a user from a leaderboard. 
-*   Add different kinds of leaderboards such as weekly, monthly, asia, europe, etc. 
+*   Add different kinds of leaderboards such as weekly, monthly, Asia, Europe, etc. 
 
 Why?
 ----
@@ -41,7 +41,7 @@ SoTopless is an open source software with AGPL v3 license. It is open source exc
 
 The source code is available at [https://github.com/nanolat/sotopless](https://github.com/nanolat/sotopless).
 
-Toturial?
+Tutorial?
 ---------
 To check out the tutorial on deploying SoTopless on Amazon EC2 node, posting scores, getting top N users, getting the rank of a user, click [here](tutorials/ios.html) for a sample code of iOS SDK, [here](tutorials/javascript.html) for JavaScript Tutorial, [here](tutorials/cpp.html) for C++ Tutorial, [here](tutorials/cpp-api.html) for C++ API.
 
