@@ -88,7 +88,7 @@ localPlayer.authenticateHandler = ^(NSError * error) {
 
 Warning
 -------
-The iOS SDK was built during TechCrunch 2013 Hackathon from 7th to 8th Sep. It took about 20 hours for coding and testing. More work needs to be done and the iOS SDK code is *experimental*.
+The iOS SDK was built during TechCrunch Disrupt 2013 Hackathon from 7th to 8th Sep. It took about 20 hours for coding and testing. More work needs to be done and the iOS SDK code is *experimental*.
 
 Full source code of SoTopless iOS SDK is available at following github URL.
 
