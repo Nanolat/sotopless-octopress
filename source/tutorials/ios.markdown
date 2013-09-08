@@ -17,7 +17,7 @@ SoTopless iOS SDK provides compatible API for major features of Leaderboard API 
 
 The only different part is user authentication. You need to pass playerID, playerAlias, and a password. 
 
-Sample code 
+A Sample Code 
 -----------
 SoTopless iOS SDK supports asynchronous API calls similar to Apple GameKit. The sample code shows following steps.
 
@@ -88,7 +88,7 @@ localPlayer.authenticateHandler = ^(NSError * error) {
 {% endcodeblock %}
 
 Warning
-=======
+-------
 The iOS SDK was built during TechCrunch 2013 Hackathon from 7th to 8th Sep. It took about 20 hours for coding and testing. More work needs to be done and the iOS SDK code is *experimental*.
 
 Full source code of SoTopless iOS SDK is available at following github URL.
