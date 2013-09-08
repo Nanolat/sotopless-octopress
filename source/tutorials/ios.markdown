@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "iOS Sample"
+title: "iOS SDK Sample"
 date: 2013-08-12 18:19
 comments: true
 sharing: true
@@ -46,8 +46,8 @@ localPlayer.authenticateHandler = ^(NSError * error) {
 
     [myScore reportScoreWithCompletionHandler:^(NSError * error) {
         if (error != NULL) {
-	    NSLog( @"Error : while authenticating : %@", error.description );
-	    return;
+            NSLog( @"Error : while authenticating : %@", error.description );
+            return;
         }
         NSLog( @"Success : Score reported.");
     
@@ -58,26 +58,25 @@ localPlayer.authenticateHandler = ^(NSError * error) {
         leaderboard.range = NSMakeRange(1,10); // 10 users from the 1st user.
     
         [leaderboard loadScoresWithCompletionHandler:^(NSArray* scores, NSError* error) {
-	    if (error != NULL) {
-	        NSLog( @"Error : while loading scores : %@", error.description );
-	        return;
-	    }
-	    NSLog( @"Success : Scores loaded.");
+            if (error != NULL) {
+                NSLog( @"Error : while loading scores : %@", error.description );
+                return;
+            }
+            NSLog( @"Success : Scores loaded.");
 
-	    NSLog( @"Player's ranking : %lld score : %lld", 
-	           leaderboard.localPlayerScore.rank, 
-	           leaderboard.localPlayerScore.value );
+            NSLog( @"Player's ranking : %lld score : %lld", 
+                   leaderboard.localPlayerScore.rank, 
+                   leaderboard.localPlayerScore.value );
 
-	
 	    NSLog( @"Listing scores." );
 	
-	    for (NLScore * score in scores) {
-	        NSString *dateString = [NSDateFormatter localizedStringFromDate:score.date
-	                                                          dateStyle:NSDateFormatterShortStyle
-	                                                          timeStyle:NSDateFormatterFullStyle];
-	    
-	        NSLog( @"Rank: %lld, Display Alias : %@, Score : %lld, Time : %@",
-	               score.rank, score.playerAlias, score.value, dateString );
+            for (NLScore * score in scores) {
+                NSString *dateString = [NSDateFormatter localizedStringFromDate:score.date
+                                             dateStyle:NSDateFormatterShortStyle
+                                             timeStyle:NSDateFormatterFullStyle];
+    
+                NSLog( @"Rank: %lld, Display Alias : %@, Score : %lld, Time : %@",
+                    score.rank, score.playerAlias, score.value, dateString );
             }
         }]; // [leaderboard loadScoresWithCompletionHandler:...]
     
