@@ -10,7 +10,7 @@ footer: true
 CircleShake
 -----------
 
-{% img /images/shakephone.jpg %}
+{% img /images/circleshake.png %}
 
 Looking for CircleShake app? Click [here](http://CircleShake.me).
 
