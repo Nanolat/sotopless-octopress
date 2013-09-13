@@ -6,13 +6,21 @@ comments: true
 sharing: true
 footer: true
 ---
+
+CircleShake
+-----------
+
+{% img /images/shakephone.jpg %}
+
+Looking for CircleShake app? Click [here](http://CircleShake.me).
+
 What?
 -----
 This is a problem.
 
 {% img /images/gamecenter.jpg %}
 
-SoTopless is a leaderboard server(ranking server) that excludes cheating players with its own genuine player checking algorithm. 
+SoTopless is a leaderboard server(ranking server) that excludes cheating players with its own genuine player checking algorithm. No more fake *top* users with millions of scores. So top-less. 
 
 It supports C++/Objective C/JavaScript client SDK for Android, iOS, Linux, and Windows platform. 
 
@@ -24,8 +32,8 @@ Following is the list of features :
 *   Get rank and score of a user from a leaderboard. 
 *   Add different kinds of leaderboards such as weekly, monthly, Asia, Europe, etc. 
 
-Why?
-----
+Why SoTopless?
+--------------
 No more scores posted by cheating players. We provide automatic cheating player filter with our own algorithm.
 
 Simple and easy APIs save your time. Focus on your game/app development, instead of designing your ranking database and server.  
@@ -33,7 +41,7 @@ SoTopless fits well with the leaderboard requirements both for your game, and yo
 
 How?
 ----
-To run our algorithm to check if the player's score is genuine, we need more computing power and efficient server S/W processing. SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine. SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
+To run our algorithm to check if the player's score is genuine, we need more computing power and efficient server S/W processing. SoTopless uses ASIO library of Boost for supporting huge number of requests leveraging asynchronous I/O on the server side, and uses carefully designed database engine with order statistics in Nanolat Database, which is open sourced [here](https://github.com/Nanolat/nldb). SoTopless server is written in C++ supporting major operating systems such as Windows and Linux.
 
 Open Source?
 ------------
@@ -61,4 +69,4 @@ All SoTopless products have an unconditional 60-day money back satisfaction guar
 
 When?
 -----
-The first closed alpha testing starts on 30th Sep. To join the alpha testing, click [here](join-alpha-test).
+The first closed alpha testing starts on October 31st. To join the alpha testing, click [here](join-alpha-test).
