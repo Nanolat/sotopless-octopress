@@ -12,7 +12,7 @@ CircleShake
 
 {% img /images/circleshake.png %}
 
-Looking for CircleShake app? Click [here](http://CircleShake.me).
+Looking for CircleShake app? Visit [http://CircleShake.me](http://CircleShake.me).
 
 What?
 -----
