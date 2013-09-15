@@ -42,9 +42,9 @@ localPlayer.authenticateHandler = ^(NSError * error) {
     ////////////////////////////////////////////////////////////////////////////////
     // Report Score
     NLScore * myScore = [[NLScore alloc] initWithCategory:@"all"];
-    [myScore increaseValue:300 reason:@"Ate Apple"; // Increase the score with a description on how the user got the score. 
-    [myScore increaseValue:500 reason:@"Ate Orange";  
-    [myScore increaseValue:100 reason:@"Ate Water";  
+    [myScore increaseValue:300 reason:@"Ate Apple"]; // Increase the score with a description on how the user got the score. 
+    [myScore increaseValue:500 reason:@"Ate Orange"];  
+    [myScore increaseValue:100 reason:@"Ate Water"];  
 
     [myScore reportScoreWithCompletionHandler:^(NSError * error) {
         if (error != NULL) {
