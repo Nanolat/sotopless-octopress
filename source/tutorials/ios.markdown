@@ -42,7 +42,9 @@ localPlayer.authenticateHandler = ^(NSError * error) {
     ////////////////////////////////////////////////////////////////////////////////
     // Report Score
     NLScore * myScore = [[NLScore alloc] initWithCategory:@"all"];
-    myScore.value = 300; // score
+    [myScore increaseValue:300 reason:@"Ate Apple"; // Increase the score with a description on how the user got the score. 
+    [myScore increaseValue:500 reason:@"Ate Orange";  
+    [myScore increaseValue:100 reason:@"Ate Water";  
 
     [myScore reportScoreWithCompletionHandler:^(NSError * error) {
         if (error != NULL) {
@@ -86,10 +88,12 @@ localPlayer.authenticateHandler = ^(NSError * error) {
 
 {% endcodeblock %}
 
-Warning
--------
-The iOS SDK was built during TechCrunch Disrupt 2013 Hackathon from 7th to 8th Sep. It took about 20 hours for coding and testing. More work needs to be done and the iOS SDK code is *experimental*.
+History & Source Code
+---------------------
+The first iOS SDK was built during TechCrunch Disrupt 2013 Hackathon from 7th to 8th Sep. It took about 20 hours for coding and testing. Source code : 
+[https://github.com/Nanolat/sotopless/tree/master/src/ios-legacy/objc](https://github.com/Nanolat/sotopless/tree/master/src/ios-legacy/objc)
 
-Full source code of SoTopless iOS SDK is available at following github URL.
-
-[https://github.com/Nanolat/sotopless/tree/master/src/ios/objc](https://github.com/Nanolat/sotopless/tree/master/src/ios/objc)
+After the Hackathon, both server code and client SDK was completely rewritten. The new version of SDK implementation eliminates unnecessary round trips between the server and client improving the time user needs to wait for posting scores and getting top scores as well as the user's score. 
+ 
+Full source code of the new SoTopless iOS SDK is available at following Github URL.
+[https://github.com/Nanolat/sotopless/tree/master/src/ios-client/objc](https://github.com/Nanolat/sotopless/tree/master/src/ios-client/objc)
